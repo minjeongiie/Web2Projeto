@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
 
-@Entity
+
 public class Evento extends Extensao {
 	private int maxParticipantes;
 	private LocalTime horaDeInicio;
