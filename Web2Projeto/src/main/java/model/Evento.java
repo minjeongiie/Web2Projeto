@@ -4,14 +4,19 @@ import java.time.Duration;
 import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
-
+@Entity
+@Table(name = "evento")
 public class Evento extends Extensao {
-	private int maxParticipantes;
-	private LocalTime horaDeInicio;
-	private LocalTime horadeTermino;
-	private double cargaHoraria;
 
+    private int maxParticipantes;
+
+    private LocalTime horaDeInicio;
+    private LocalTime horaDeTermino;
+
+    private double cargaHoraria;
+    
 	public Evento() {
 	}
 
@@ -28,28 +33,29 @@ public class Evento extends Extensao {
 	}
 
 	public void setHoraDeInicio(LocalTime horaDeInicio) {
-		this.horaDeInicio = horaDeInicio;
-		setCargaHoraria();
-	}
+        this.horaDeInicio = horaDeInicio;
+        calcularCargaHoraria();
+    }
 
 	public LocalTime getHoradeTermino() {
-		return horadeTermino;
+		return horaDeTermino;
 	}
 
-	public void setHoradeTermino(LocalTime horadeTermino) {
-		this.horadeTermino = horadeTermino;
-		setCargaHoraria();
-	}
+	public void setHoraDeTermino(LocalTime horaDeTermino) {
+        this.horaDeTermino = horaDeTermino;
+        calcularCargaHoraria();
+    }
 
 	public double getCargaHoraria() {
 		return cargaHoraria;
 		
 	}
 
-	private void setCargaHoraria() {
-		Duration duracao = Duration.between(horaDeInicio, horadeTermino);
-		long cargaHorariaEmHoras = duracao.toMinutes()/60;
-		this.cargaHoraria = cargaHorariaEmHoras;
-	}
+	private void calcularCargaHoraria() {
+        if (horaDeInicio != null && horaDeTermino != null) {
+            Duration duracao = Duration.between(horaDeInicio, horaDeTermino);
+            this.cargaHoraria = duracao.toMinutes() / 60.0;
+        }
+    }
 
 }

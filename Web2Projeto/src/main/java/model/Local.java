@@ -1,68 +1,69 @@
 package model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
 
 public class Local {
 
-	private int id;
-	private String nomeLocal;
-	private String predio;
-	private String andar;
-	private String sala;
-	private String linkOnline;
-	
-	public int getId() {
-		return id;
-	}
+    private int id;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    private String nomeLocal;
+    private String predio;
+    private String andar;
+    private String sala;
+    private String linkOnline;
 
-	public String getNomeLocal() {
-		return nomeLocal;
-	}
+    public Local() {
+    }
 
-	public void setNomeLocal(String nomeLocal) {
-		this.nomeLocal = nomeLocal;
-	}
+    public Local(String nomeLocal, String predio, String andar, String sala, String linkOnline) {
+        this.nomeLocal = nomeLocal;
+        this.predio = predio;
+        this.andar = andar;
+        this.sala = sala;
+        this.linkOnline = linkOnline;
+    }
 
-	public String getPredio() {
-		return predio;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setPredio(String predio) {
-		this.predio = predio;
-	}
+    public String getNomeLocal() {
+        return nomeLocal;
+    }
 
-	public String getAndar() {
-		return andar;
-	}
+    public void setNomeLocal(String nomeLocal) {
+        this.nomeLocal = nomeLocal;
+    }
 
-	public void setAndar(String andar) {
-		this.andar = andar;
-	}
+    public String getPredio() {
+        return predio;
+    }
 
-	public String getSala() {
-		return sala;
-	}
+    public void setPredio(String predio) {
+        this.predio = predio;
+    }
 
-	public void setSala(String sala) {
-		this.sala = sala;
-	}
+    public String getAndar() {
+        return andar;
+    }
 
-	public String getLinkOnline() {
-		return linkOnline;
-	}
+    public void setAndar(String andar) {
+        this.andar = andar;
+    }
 
-	public void setLinkOnline(String linkOnline) {
-		this.linkOnline = linkOnline;
-	}
+    public String getSala() {
+        return sala;
+    }
 
-	public Local() {
-	}
+    public void setSala(String sala) {
+        this.sala = sala;
+    }
 
+    public String getLinkOnline() {
+        return linkOnline;
+    }
+
+    public void setLinkOnline(String linkOnline) {
+        this.linkOnline = linkOnline;
+    }
 }
