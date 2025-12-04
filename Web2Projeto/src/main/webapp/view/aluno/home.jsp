@@ -1,11 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="model.ExtensaoResumo" %>
+<%
+    List<ExtensaoResumo> lista = (List<ExtensaoResumo>) request.getAttribute("lista");
+%>
 <%
     Object user = session.getAttribute("usuario");
     if (user == null) {
         response.sendRedirect("login.jsp");
         return;
     }
+    
+    model.Aluno Aluno = (model.Aluno) user;
 %>
 <!DOCTYPE html>
 <html>
@@ -14,53 +20,81 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Home</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-		<link rel="stylesheet" href="../../css/style.css">
+	    <link rel="stylesheet"
+	     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+	    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
 	</head>
 	<body>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-cobalto text-white">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="#">
-		      <img src="../../img/rural_logo_branco04.png" alt="Logo UFRRJ" width="250">
+		      <img src="<%=request.getContextPath()%>/img/rural_logo_branco04.png" alt="Logo UFRRJ" width="250">
 		    </a>
-		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-		      <span class="navbar-toggler-icon"></span>
-		    </button>
-		    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#">Início</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Eventos</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Cursos</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Projetos</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Programas</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Serviços</a>
-		        </li>
-		      </ul>
-			    <div>
-				   	<a href="https://www.facebook.com/universidadefederalrural" class="text-decoration-none text-white">
-				  		<i class="bi bi-facebook me-3"></i>
-					</a>
-					<a href="https://www.instagram.com/universidadefederalrural" class="text-decoration-none text-white">
-				  		<i class="bi bi-instagram me-3"></i>
-					</a>
-					<a href="https://www.youtube.com/universidaderural" class="text-decoration-none text-white">
-				  		<i class="bi bi-youtube"></i>
-					</a>
-			    </div>
+		
+		    <div class="ms-auto text-end">
+		        <span class="me-4">Olá, <strong><%= Aluno.getNome() %></strong></span>
+		        <a href="<%=request.getContextPath()%>/logout" class="btn btn-light btn-sm">Sair</a>
 		    </div>
 		  </div>
 		</nav>
+		<% if (request.getParameter("msg") != null) { %>
+		    <div class="alert alert-success">
+		        Inscrição realizada com sucesso!
+		    </div>
+		<% } %>
+
+		<% if ("ja_inscrito".equals(request.getParameter("msg"))) { %>
+		    <div class="alert alert-warning">
+		        Você já está inscrito nesta atividade.
+		    </div>
+		<% } %>
+		
+		<div class="container mt-4">
+
+    <h2 class="mb-4">Atividades de Extensão</h2>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Tipo</th>
+                <th>Período</th>
+                <th>Status</th>
+                <th style="width:160px;">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <%
+		    if (lista == null) {
+		        response.sendRedirect(request.getContextPath() + "/aluno/home");
+		        return;
+		    }
+		%>
+        <% for (ExtensaoResumo e : lista) { %>
+
+            <tr>
+                <td><%= e.getTitulo() %></td>
+                <td><%= e.getTipo() %></td>
+                <td><%= e.getDataInicio() %> → <%= e.getDataFim() %></td>
+                <td><%= e.getStatus() %></td>
+
+                <td>
+				    <a href="${pageContext.request.contextPath}/aluno/detalhes?tipo=<%= e.getTipo() %>&id=<%= e.getId() %>"
+				       class="btn btn-primary btn-sm">Ver detalhes</a>
+				
+				    <a href="${pageContext.request.contextPath}/aluno/inscrever?tipo=<%= e.getTipo() %>&id=<%= e.getId() %>"
+				       class="btn btn-success btn-sm">Inscrever-se</a>
+				</td>
+
+            </tr>
+
+        <% } %>
+        </tbody>
+		
+    </table>
+
+</div>
 	</body>
 </html>
