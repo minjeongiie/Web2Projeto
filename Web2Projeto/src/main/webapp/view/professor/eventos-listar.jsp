@@ -26,7 +26,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-cobalto text-white">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="<%=request.getContextPath()%>/view/professor/home.jsp">
       <img src="<%=request.getContextPath()%>/img/rural_logo_branco04.png" alt="Logo UFRRJ" width="250">
     </a>
 
@@ -52,6 +52,7 @@
 				<th>Data</th>
 				<th>Local</th>
 				<th>Status</th>
+				<th>Ações</th> <!-- NOVO -->
 			</tr>
 		</thead>
 		<tbody>
@@ -66,6 +67,14 @@
 				<td><%= e.getDataInicio() %> até <%= e.getDataFim() %></td>
 				<td><%= e.getLocal() %></td>
 				<td><%= e.getStatus() %></td>
+
+				<!-- BOTÃO EDITAR -->
+				<td>
+					<a href="${pageContext.request.contextPath}/prof/eventos?acao=editar&id=<%= e.getId() %>" 
+					   class="btn btn-sm btn-warning">
+						Editar
+					</a>
+				</td>
 			</tr>
 
 			<% } %>
@@ -74,6 +83,7 @@
 	</table>
 
 </div>
+
 
 </body>
 </html>
