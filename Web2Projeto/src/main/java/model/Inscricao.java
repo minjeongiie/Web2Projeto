@@ -11,6 +11,9 @@ public class Inscricao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Transient
+    private String tituloAtividade;
+    
     @ManyToOne
     private Aluno aluno;
 
@@ -19,7 +22,7 @@ public class Inscricao {
 
     private LocalDate dataInscricao;
 
-    private String status; // “Inscrito”, “Cancelado”, etc.
+    private String status; // “Inscrito”, “Cancelado”
 
     public Integer getId() { return id; }
 
@@ -37,4 +40,12 @@ public class Inscricao {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    
+    public String getTituloAtividade() {
+        return tituloAtividade;
+    }
+
+    public void setTituloAtividade(String tituloAtividade) {
+        this.tituloAtividade = tituloAtividade;
+    }
 }

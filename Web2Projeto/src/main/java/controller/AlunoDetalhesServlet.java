@@ -43,7 +43,7 @@ public class AlunoDetalhesServlet extends HttpServlet {
                 extensao = new CursoDAO().buscarPorId(id);
                 break;
 
-            case "servico":
+            case "serviço":
                 extensao = new ServicoDAO().buscarPorId(id);
                 break;
 

@@ -7,7 +7,7 @@
 <%
     Object user = session.getAttribute("usuario");
     if (user == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("../login.jsp");
         return;
     }
     
@@ -37,6 +37,9 @@
 		        <a href="<%=request.getContextPath()%>/logout" class="btn btn-light btn-sm">Sair</a>
 		    </div>
 		  </div>
+				  <a href="${pageContext.request.contextPath}/aluno/inscricoes"
+		   class="btn btn-outline-light btn-sm">Minhas Inscrições</a>
+		  
 		</nav>
 		<% if (request.getParameter("msg") != null) { %>
 		    <div class="alert alert-success">
@@ -96,5 +99,11 @@
     </table>
 
 </div>
+		<footer id="sticky-footer" class="bg-cobalto text-light text-center py-3 mt-5">
+		    <div class="container">
+		        <p class="mb-1">Projeto desenvolvido por: Laís de Souza Martins Cano e  Caio Luiz Ramos De Souza</p>
+		        <p class="mb-0">© 2025</p>
+		    </div>
+		</footer>
 	</body>
 </html>

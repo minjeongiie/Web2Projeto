@@ -5,7 +5,15 @@
 <%
     List<Programa> lista = (List<Programa>) request.getAttribute("lista");
 %>
-
+<%
+	Object user = session.getAttribute("usuario");
+	if (user == null) {
+	    response.sendRedirect(request.getContextPath() + "/view/login.jsp");
+	    return;
+	}
+	
+	model.Professor prof = (model.Professor) user;
+%>
 <!DOCTYPE html>
 <html>
 <head>

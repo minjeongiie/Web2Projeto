@@ -104,6 +104,11 @@
 
     </div>
 </div>
-
+		<footer id="sticky-footer" class="bg-cobalto text-light text-center py-3 mt-5">
+		    <div class="container">
+		        <p class="mb-1">Projeto desenvolvido por: Laís de Souza Martins Cano e  Caio Luiz Ramos De Souza</p>
+		        <p class="mb-0">© 2025</p>
+		    </div>
+		</footer>
 </body>
 </html>
